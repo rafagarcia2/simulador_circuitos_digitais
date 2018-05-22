@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        simulador.cpp
+        simulador.cpp \
+    bool3S.cpp \
+    circuito.cpp
 
-HEADERS  += simulador.h
+HEADERS  += simulador.h \
+    bool3S.h \
+    circuito.h
 
 FORMS    += simulador.ui
