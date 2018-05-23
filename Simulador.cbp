@@ -22,7 +22,7 @@
 		</Compiler>
 		<Unit filename="circuito.cpp" />
 		<Unit filename="circuito.h" />
-		<Unit filename="main.cpp" />
+		<Unit filename="main-codeblocks.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
