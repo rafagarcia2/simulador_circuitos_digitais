@@ -1,0 +1,5 @@
+CIRCUITO: 1 1 1
+PORTAS:
+1) NT 1: -1
+SAIDAS:
+1) 1
