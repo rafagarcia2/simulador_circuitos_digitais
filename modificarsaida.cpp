@@ -43,6 +43,7 @@ void ModificarSaida::on_buttonBox_accepted()
     // Aqui deve ser chamado um metodo da classe Circuito que altere a saida cuja
     // id eh idSaida para que ela assuma a origem especificada por
     // idOutput
+    C.setIdOutput(idSaida-1, idOutput);
 
     // Depois de alterada, deve ser reexibida a saida correspondente
     ((MainCircuito*)parentWidget())->exibe_saida(idSaida-1);

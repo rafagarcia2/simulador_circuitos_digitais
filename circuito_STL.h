@@ -199,6 +199,9 @@ public:
   // Calcula a saida das portas do circuito para os valores de entrada que estao em inputs[i]
   void simular();
   void port_map(bool_3S in[],const Porta &P);
+  // Caracteristicas das saidas
+  // Altera a origem da saida de id "IdOut", que passa a ser "Id"
+  void setIdOutput(unsigned IdOut, int Id);
   // Calcula a tabela verdade do circuito:
   void gerarTabela(void);
 };

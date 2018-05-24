@@ -90,7 +90,7 @@ void ModificarPorta::on_buttonBox_accepted()
     // Aqui deve ser chamado um metodo da classe Circuito que altere a porta cuja
     // id eh idPorta para que ela assuma as caracteristicas especificadas por
     // tipoPorta, numInputsPorta, idInputPorta[]
-    C.replace(idPorta,tipoPorta.toStdString(),numInputsPorta,idInputPorta);
+    C.replace(idPorta-1,tipoPorta.toStdString(),numInputsPorta,idInputPorta);
 
     // Depois de alterado, deve ser reexibida a porta correspondente
     ((MainCircuito*)parentWidget())->exibe_porta(idPorta-1);

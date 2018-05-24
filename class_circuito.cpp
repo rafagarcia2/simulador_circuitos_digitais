@@ -348,3 +348,6 @@ unsigned Circuito::getNumInputsPorta(unsigned IdPorta) const{
         return 0;
     }
 }
+void Circuito::setIdOutput(unsigned IdOut, int Id){
+    id_out[IdOut] = Id;
+}
