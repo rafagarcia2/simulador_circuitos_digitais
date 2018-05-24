@@ -322,3 +322,29 @@ void Circuito::newCircuito(unsigned NI, unsigned NO, unsigned NP)
     limpar();
     alocar(NI,NO,NP);
 }
+
+int Circuito::getTipoPorta(unsigned IdPorta) const
+{
+    if (portas[IdPorta]){
+        cout << "Não está vazio!" << endl;
+        cout << "Não está vazio!" << portas[IdPorta]->getTipo() << endl;
+        return portas[IdPorta]->getTipo();
+    }
+    else
+    {
+        cout << "Está vazio!" << endl;
+        return -1;
+    }
+}
+
+unsigned Circuito::getNumInputsPorta(unsigned IdPorta) const{
+    if (portas[IdPorta]){
+        cout << "Existe essa POrta!" << endl;
+        return portas[IdPorta]->getNumInputs();
+    }
+    else
+    {
+        cout << "Não existe a porta!" << endl;
+        return 0;
+    }
+}

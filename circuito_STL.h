@@ -170,6 +170,11 @@ public:
   inline int getId_out(unsigned i) const { return id_out[i]; }
   ptr_Porta getPorta(unsigned i) const { return portas[i]->clone(); }
 
+  // Caracteristicas das portas
+  int getTipoPorta(unsigned IdPorta) const;
+  // Retorna o numero de entradas da porta cuja id eh IdPorta
+  unsigned getNumInputsPorta(unsigned IdPorta) const;
+
   inline void setInputs(const vector<bool_3S> &in) { inputs = in;}
 
   void newCircuito(unsigned NI, unsigned NO, unsigned NP);

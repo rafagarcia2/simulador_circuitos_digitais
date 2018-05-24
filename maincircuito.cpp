@@ -183,7 +183,7 @@ void MainCircuito::exibe_porta(int i)
     // Esses valores (nomePorta, numInputsPorta, idInputPorta[])
     // devem ser lidos a partir de metodos de consulta da classe Circuito
     // Para fazer um teste, vamos atribuir quantidades aleatorias
-    switch (C.getPorta(i)->getTipo())
+    switch (C.getTipoPorta(i))
     {
     case 0:
         nomePorta = "NT";
@@ -210,7 +210,8 @@ void MainCircuito::exibe_porta(int i)
         nomePorta = "??";
         break;
     }
-    numInputsPorta = (nomePorta != "NT" ? C.getPorta(i)->getNumInputs() : 1);
+    //numInputsPorta = (nomePorta != "NT" ? C.getPorta(i)->getNumInputs() : 1);
+    numInputsPorta = (nomePorta != "NT" ? C.getNumInputsPorta(i) : 1);
     for (j=0; j<numInputsPorta; j++)
         idInputPorta[j] = C.getPorta(i)->getId_in(j);
     // Cria e define valores dos widgets da linha da tabela que corresponde aa porta
