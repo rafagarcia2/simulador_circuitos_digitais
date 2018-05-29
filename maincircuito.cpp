@@ -283,6 +283,8 @@ void MainCircuito::on_actionLer_triggered()
     }
     if (!valido){
         erroarq.show();
+        C.limpar();
+        redimensiona_tabelas();
     }
 }
 
@@ -311,6 +313,10 @@ void MainCircuito::on_actionGerar_tabela_triggered()
     // Gera todas as possibilidades de combinacao das entradas
     //
 
+    if (!C.valido()) {
+        valido_circ.show();
+        return;
+    }
     int numInputs = getNumEntradas();
     int numOutputs = getNumSaidas();
     int numCombinacoesEntrada = (numInputs>0 ? round(pow(3,numInputs)) : 0);;

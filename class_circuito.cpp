@@ -79,13 +79,16 @@ bool Circuito::alocar(const string &tipo,bool enable,unsigned id)
   return true;
 }
 
-void Circuito::ler(const char* arq)
+bool Circuito::ler(const char* arq)
 {
   ifstream read(arq);
   string key_word;
   int aux;
 
-  if(!arq_valido(arq)) return;
+  if(!arq_valido(arq)){
+    limpar();
+    return false;
+  }
   limpar();
 
   getline(read,key_word,':');
@@ -108,6 +111,10 @@ void Circuito::ler(const char* arq)
     id_out[i] = aux;
   }
   read.close();
+  if(!C.valido()){
+      return false;
+  }
+  return true;
 }
 
 bool Circuito::arq_valido(const char* arq)
@@ -194,11 +201,18 @@ ostream &Circuito::imprimir(ostream &O)const
   }
   return O;
 }
-void Circuito::salvar(const char* arq) const
+bool Circuito::salvar(const char* arq) const
 {
-  ofstream write(arq);
-  write << (*this);
-  write.close();
+  if (C.valido()){
+      ofstream write(arq);
+      write << (*this);
+      write.close();
+      return true;
+  } else {
+     cout << "Incorreto o circuito!" << endl;
+     return false;
+  }
+
 }
 istream &operator>>(istream &I,bool_3S &in)
 {
@@ -250,6 +264,75 @@ void Circuito::port_map(bool_3S in[],const Porta &P)
     else
       in[i] = portas[index-1]->getSaida();
   }
+}
+
+bool Circuito::valido(void) const
+{
+    if(Nin > 4){
+        cout << "quantidade de entrada maior que 4";
+        return false;
+    }
+    if(Nin == 0){
+        cout << "Nin == 0";
+        return false;
+    }
+    if(Nout == 0){
+        cout << "Nout == 0";
+        return false;
+    }
+    if(Nout > (Nportas + Nin)){
+        cout << "quantidade de saida maior que maior que o numero de entradas e saida somados";
+        return false;
+    }
+    if(Nportas == 0){
+        cout << "o circuito tem quantidade de portas nula";
+        return false;
+    }
+
+    unsigned contOut(0);
+    int entradas(Nin), saidas(Nout), port(Nportas);
+
+    for(unsigned cont = 0; cont <(Nin + Nportas); cont++){
+        if (cont < Nportas){
+            if(C.getTipoPorta(cont) < 0){
+                cout << "Tipo de Porta indefenido";
+                return false;
+            }
+            for(unsigned i = 0; i < portas[cont]->getNumInputs(); i++){
+
+                if(portas[cont]->getId_in(i) == 0){
+                    cout << "id_in == 0";
+                    return false;
+                }
+                if(portas[cont]->getId_in(i) < -entradas ){
+                    cout << "id_in < -Nin";
+                    return false;
+                }
+                if(portas[cont]->getId_in(i) > port)
+                {
+                    cout << "id_in > numero de portas";
+                    return false;
+                }
+            }
+        }
+        if(cont < Nout){
+                if(id_out[contOut] == 0){
+                    cout << "id_out == 0";
+                    return false;
+                }
+                if(id_out[contOut] < -saidas){
+                    cout << "id_out < -Nin";
+                    return false;
+                }
+                if(id_out[contOut] > port){
+                    cout << "id_out > numero de portas";
+                    cout << " " << id_out[contOut];
+                    return false;
+                }
+                contOut++;
+        }
+    }
+    return true;
 }
 
 
@@ -326,8 +409,6 @@ void Circuito::newCircuito(unsigned NI, unsigned NO, unsigned NP)
 int Circuito::getTipoPorta(unsigned IdPorta) const
 {
     if (portas[IdPorta]){
-        cout << "Não está vazio!" << endl;
-        cout << "Não está vazio!" << portas[IdPorta]->getTipo() << endl;
         return portas[IdPorta]->getTipo();
     }
     else
@@ -339,7 +420,6 @@ int Circuito::getTipoPorta(unsigned IdPorta) const
 
 unsigned Circuito::getNumInputsPorta(unsigned IdPorta) const{
     if (portas[IdPorta]){
-        cout << "Existe essa POrta!" << endl;
         return portas[IdPorta]->getNumInputs();
     }
     else
