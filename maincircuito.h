@@ -6,6 +6,8 @@
 #include "newcircuito.h"
 #include "modificarporta.h"
 #include "modificarsaida.h"
+#include "errofile.h"
+#include "circuitovalido.h"
 
 /* ======================================================================== *
  * ESSA EH A CLASSE QUE REPRESENTA A TELA PRINCIPAL DO APLICATIVO           *
@@ -67,6 +69,8 @@ private:
     NewCircuito newCircuito;        // Caixa de dialogo para criar um novo circuito
     ModificarPorta modificarPorta;  // Caixa de dialogo para modificar uma porta
     ModificarSaida modificarSaida;  // Caixa de dialogo para modificar uma saida
+    errofile erroarq;
+    circuitovalido valido_circ;
 };
 
 #endif // MAINCIRCUITO_H

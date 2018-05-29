@@ -18,7 +18,9 @@ MainCircuito::MainCircuito(QWidget *parent) :
     NumPortas(this),
     newCircuito(this),
     modificarPorta(this),
-    modificarSaida(this)
+    modificarSaida(this),
+    erroarq(this),
+    valido_circ(this)
 {
     ui->setupUi(this);
 
@@ -273,10 +275,14 @@ void MainCircuito::on_actionLer_triggered()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Arquivo de circuito"), QString(),
             tr("Circuitos (*.txt);;Todos (*.*)"));
 
+    bool valido = true;
     if (!fileName.isEmpty()) {
-        C.ler(fileName.toStdString().c_str());
+        valido = C.ler(fileName.toStdString().c_str());
         // Feita a leitura, reexibe todas as tabelas
         redimensiona_tabelas();
+    }
+    if (!valido){
+        erroarq.show();
     }
 }
 
@@ -286,10 +292,14 @@ void MainCircuito::on_actionSalvar_triggered()
     QString fileName = QFileDialog::getSaveFileName(this, tr("Arquivo de circuito"), QString(),
             tr("Circuitos (*.txt);;Todos (*.*)"));
 
+    bool valido = true;
     if (!fileName.isEmpty()) {
         if (!fileName.isEmpty()) {
-            C.salvar(fileName.toStdString().c_str());
+            valido = C.salvar(fileName.toStdString().c_str());
         }
+    }
+    if (!valido){
+        valido_circ.show();
     }
 }
 

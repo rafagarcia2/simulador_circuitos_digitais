@@ -29,15 +29,23 @@ SOURCES += main.cpp\
     newcircuito.cpp \
     modificarsaida.cpp \
     class_circuito.cpp \
-    class_portas.cpp
+    class_portas.cpp \
+    errofile.cpp \
+    circuitovalido.cpp
 
 HEADERS  += maincircuito.h \
     modificarporta.h \
     newcircuito.h \
     modificarsaida.h \
-    circuito_STL.h
+    circuito_STL.h \
+    errofile.h \
+    circuitovalido.h
 
 FORMS    += maincircuito.ui \
     modificarporta.ui \
     newcircuito.ui \
-    modificarsaida.ui
+    modificarsaida.ui \
+    errofile.ui \
+    circuitovalido.ui
+
+DISTFILES +=

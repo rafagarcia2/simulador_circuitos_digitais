@@ -189,12 +189,14 @@ public:
   void digitar();
   bool arq_valido(const char* arq);
   // Entrada dos dados de um circuito via arquivo
-  void ler(const char* arq);
+  bool ler(const char* arq);
   // Saida dos dados de um circuito (em tela ou arquivo, mesma funcao)
   ostream &imprimir(ostream &O=cout) const;
   // Salvar circuito em arquivo
   // Abre a stream e depois chama o metodo imprimir
-  void salvar(const char* arq) const;
+  bool salvar(const char* arq) const;
+  // Retorna true se o circuito eh valido (estah com todos os dados corretamente preenchidos)
+  bool valido() const;
 
   // Calcula a saida das portas do circuito para os valores de entrada que estao em inputs[i]
   void simular();
